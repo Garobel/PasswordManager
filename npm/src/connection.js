@@ -1,0 +1,24 @@
+//import mysql module and mysql databse configuration
+const mysql = require('mysql')
+const {mysql_database} = require('./config')
+
+//creating the connection with the database and managing err
+
+const connection = mysql.createConnection(mysql_database)
+
+
+
+connection.connect((err,conn) => {
+
+    if(err){
+
+        console.log(`An error has occurred : ${err}`)
+    }
+    else{
+
+        console.log('Connected to the data base')
+
+        return conn
+
+    }
+})
