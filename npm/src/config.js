@@ -9,12 +9,4 @@ module.exports = {
 
 
     },
-    mysql_database2 : {
-        host: 'localhost',
-        user: 'root',
-        password: 'Roberto1987',
-        database: 'node_users',
-
-
-    }
 }
