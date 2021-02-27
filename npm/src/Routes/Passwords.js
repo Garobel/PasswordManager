@@ -4,15 +4,21 @@ const router = express.Router()
 
 
 //controllers import
-const Controllers = require('../Controllers/PasswordCont')
+const UsersAccount = require('../Controllers/UsersAccount')
+const PasswordsCont = require('../Controllers/PasswordsCont')
 
 // Login and Register
 
-router.post('/login',Controllers.Login)
-router.post('/reg',Controllers.Register)
+router.post('/login',UsersAccount.Login)
+router.post('/reg',UsersAccount.Register)
 
 //Get Routes
-
+router.get('/getpassword',PasswordsCont.ShowPassword)
+router.get('/allPasswords',PasswordsCont.AllPassword)
 //Post Routes
+router.get('/password',PasswordsCont.CreatePassword)
+router.get('/deletePass',PasswordsCont.DeletePass)
+router.get('/ModifyPass',PasswordsCont.ModifyPass)
+
 
 module.exports = router
