@@ -1,25 +1,51 @@
 // databases conection
 const connection = require('../connection')
+const bcrypt = require('bcrypt')
 
-const CreatePassword = ()=>{
-    console.log('heyyyyy')
+
+const GetCreatePassword = (req,res) => {
+    res.render('CreatePassword')
 }
 
-const ShowPassword = (ERR,RES) =>{
-    console.log('password para ti')
+const CreatePassword = (req,res)=>{
+
+    //Passwrod encryption 
+    const PassCrypt = bcrypt.hashSync(req.body.password, 10)
+    // sql query
+    const sql = `insert into passwords SET web='${req.body.web}', user_name='${req.body.user_name}' , password='${PassCrypt}'`
+    
+    connection.query(sql,PassCrypt,(err,result)=>{
+
+        if(err){
+
+            console.log('error ocurring when introducing the data from the form')
+            console.log(err)
+        }else{
+
+            console.log('information registered')
+            res.redirect('/password')
+        }
+    })
     
 }
 
-const AllPassword = () => {
-    console.log('all password')
+const ShowPassword = (err,res) =>{
+    res.render('CreatePassword')
+    
 }
 
-const DeletePass = () => {
+const AllPassword = (err,res) => {
+    res.render('AllPassword')
+}
+
+const DeletePass = (err,res) => {
+    res.render('DeletePassword')
 
 }
 
-const ModifyPass = () => {
+const ModifyPass = (err,res) => {
+    res.render('UpdatePassword')
 
 }
 
-module.exports = {CreatePassword,ShowPassword,AllPassword,DeletePass,ModifyPass}
+module.exports = {CreatePassword,ShowPassword,AllPassword,DeletePass,ModifyPass,GetCreatePassword}

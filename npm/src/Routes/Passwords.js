@@ -13,10 +13,11 @@ router.post('/login',UsersAccount.Login)
 router.post('/reg',UsersAccount.Register)
 
 //Get Routes
+router.get('/password',PasswordsCont.GetCreatePassword)
 router.get('/getpassword',PasswordsCont.ShowPassword)
 router.get('/allPasswords',PasswordsCont.AllPassword)
 //Post Routes
-router.get('/password',PasswordsCont.CreatePassword)
+router.post('/password',PasswordsCont.CreatePassword)
 router.get('/deletePass',PasswordsCont.DeletePass)
 router.get('/ModifyPass',PasswordsCont.ModifyPass)
 

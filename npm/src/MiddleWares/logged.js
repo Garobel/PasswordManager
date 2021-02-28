@@ -1,7 +1,7 @@
 const logged = (req,res,next) => {
     
     console.log('Middlewarw Running')
-    next()
+    next(console.log())
     
 }
 
