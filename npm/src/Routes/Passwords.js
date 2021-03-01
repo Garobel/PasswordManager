@@ -16,10 +16,12 @@ router.post('/reg',UsersAccount.Register)
 router.get('/password',PasswordsCont.GetCreatePassword)
 router.get('/getpassword',PasswordsCont.ShowPassword)
 router.get('/allPasswords',PasswordsCont.AllPassword)
+router.get('/deletePass/:id',PasswordsCont.DeletePass)
+router.get('/ModifyPass/:id',PasswordsCont.ModifyPass)
 //Post Routes
 router.post('/password',PasswordsCont.CreatePassword)
-router.get('/deletePass',PasswordsCont.DeletePass)
-router.get('/ModifyPass',PasswordsCont.ModifyPass)
+router.post('/deletePass/:id',PasswordsCont.PostDeletePass)
+router.post('/ModifyPass/:id',PasswordsCont.PostModifyPass)
 
 
 module.exports = router

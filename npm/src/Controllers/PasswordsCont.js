@@ -9,12 +9,10 @@ const GetCreatePassword = (req,res) => {
 
 const CreatePassword = (req,res)=>{
 
-    //Passwrod encryption 
-    const PassCrypt = bcrypt.hashSync(req.body.password, 10)
     // sql query
-    const sql = `insert into passwords SET web='${req.body.web}', user_name='${req.body.user_name}' , password='${PassCrypt}'`
+    const sql = `insert into passwords SET web='${req.body.web}', user_name='${req.body.user_name}' , email='${req.body.email}' , password='${req.body.password}'`
     
-    connection.query(sql,PassCrypt,(err,result)=>{
+    connection.query(sql,(err,result)=>{
 
         if(err){
 
@@ -23,29 +21,113 @@ const CreatePassword = (req,res)=>{
         }else{
 
             console.log('information registered')
-            res.redirect('/password')
+            res.redirect('/allpasswords')
         }
     })
     
 }
 
-const ShowPassword = (err,res) =>{
+const ShowPassword = (req,res) =>{
     res.render('CreatePassword')
     
 }
 
-const AllPassword = (err,res) => {
-    res.render('AllPassword')
+const AllPassword = (req,res) => {
+    sql = 'select * from passwords'
+
+    connection.query(sql,(err,result)=>{
+
+        if (err) {
+            console.log('Error trying to get the information from db')
+        }
+        else{
+
+            
+            res.render('AllPassword',{Data:result})
+
+        }
+    })
+    
 }
 
-const DeletePass = (err,res) => {
-    res.render('DeletePassword')
+const DeletePass = (req,res) => {
+
+    sql = `select * from passwords WHERE id=${req.params.id}`
+
+    connection.query(sql,(err,result) => {
+
+        if (err) {
+
+            console.log('Error trying to get the information from db')
+
+        }
+       else{
+
+           res.render('DeletePassword' ,{Data:result} )
+       }
+   })
 
 }
 
-const ModifyPass = (err,res) => {
-    res.render('UpdatePassword')
+const PostDeletePass = (req,res) => {
+
+    sql=`DELETE from passwords where id=${req.params.id}`
+
+    connection.query(sql,(err,result) =>{
+
+        if(err){
+
+            console.log('Error trying to delete the data from de db')
+        }
+        else{
+
+            res.redirect('/allpasswords')
+        }
+    })
+}
+
+const ModifyPass = (req,res) => {
+
+    sql = `select * from passwords WHERE id=${req.params.id}`
+
+     connection.query(sql,(err,result) => {
+
+         if (err) {
+
+             console.log('Error trying to get the information from db')
+
+         }
+        else{
+
+            res.render('UpdatePassword' ,{Data:result} )
+        }
+    })
+    
 
 }
 
-module.exports = {CreatePassword,ShowPassword,AllPassword,DeletePass,ModifyPass,GetCreatePassword}
+const PostModifyPass = (req,res) => {
+
+    //ID information
+    const param = req.params.id
+
+    // sql query
+    sql = `update passwords SET web='${req.body.web}', user_name='${req.body.user_name}' , email='${req.body.email}' , password='${req.body.password}' WHERE id=${param}`
+
+    connection.query(sql,(err,result) => {
+
+        if(err){
+
+            console.log('Error trying to update the information')
+
+        }
+        else{
+
+            console.log('Information updated')
+            res.redirect('/allpasswords')
+        }
+    })
+
+}
+
+module.exports = {CreatePassword,ShowPassword,AllPassword,DeletePass,ModifyPass,GetCreatePassword,PostModifyPass,PostDeletePass}
