@@ -9,22 +9,23 @@ const GetCreatePassword = (req,res) => {
 
 const CreatePassword = (req,res)=>{
 
-    // sql query
-    const sql = `insert into passwords SET web='${req.body.web}', user_name='${req.body.user_name}' , email='${req.body.email}' , password='${req.body.password}'`
+        // sql query
+        const sql = `insert into passwords SET web='${req.body.web}', user_name='${req.body.user_name}' , email='${req.body.email}' , password='${req.body.password}'`
+        
+        connection.query(sql,(err,result)=>{
+
+            if(err){
+
+                console.log('error ocurring when introducing the data from the form')
+                console.log(err)
+            }else{
+
+                console.log('information registered')
+                res.redirect('/allpasswords')
+            }
+        })
     
-    connection.query(sql,(err,result)=>{
 
-        if(err){
-
-            console.log('error ocurring when introducing the data from the form')
-            console.log(err)
-        }else{
-
-            console.log('information registered')
-            res.redirect('/allpasswords')
-        }
-    })
-    
 }
 
 const ShowPassword = (req,res) =>{
@@ -33,6 +34,7 @@ const ShowPassword = (req,res) =>{
 }
 
 const AllPassword = (req,res) => {
+
     sql = 'select * from passwords'
 
     connection.query(sql,(err,result)=>{

@@ -9,7 +9,9 @@ const PasswordsCont = require('../Controllers/PasswordsCont')
 
 // Login and Register
 
-router.post('/login',UsersAccount.Login)
+router.get('/',UsersAccount.getLogin)
+router.get('/reg',UsersAccount.GetRegister)
+router.post('/',UsersAccount.Login)
 router.post('/reg',UsersAccount.Register)
 
 //Get Routes

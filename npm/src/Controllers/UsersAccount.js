@@ -12,14 +12,19 @@ const data ={
 
 //POST ROUTES
 
+const GetRegister = (req,res) => {
+
+    res.render('CreateUser')
+}
+
 const Register = (req,res) => {
     
     //password encryption
 
-    const data2 = bcrypt.hashSync(data.password, 10)
+    const data2 = bcrypt.hashSync(req.body.password, 10)
 
     // sql query
-    const sql = `insert into users SET name='${data.name}' , email='${data.email}' , password='${data2}'`
+    const sql = `insert into users SET name='${req.body.name}' , email='${req.body.email}' , password='${data2}'`
     
     // crating the users
 
@@ -29,17 +34,23 @@ const Register = (req,res) => {
             console.log(`error when registering data: ${err} `)
         }else{
             console.log('User Created')
+            res.redirect('/')
 
         }
     })
 
 }
 
+const getLogin = (req,res) => {
+
+    res.render('index')
+}
+
 const Login = (req,res) => {
 
     // sqlquery 
-  
-        const sql = `select * FROM users WHERE email='${data.email}'`
+        console.log(req.body.email)
+        const sql = `select * FROM users WHERE email='${req.body.email}'`
          
         connection.query(sql,(err,result) => {
 
@@ -49,20 +60,23 @@ const Login = (req,res) => {
 
                 
                 // check passwords from the db
-                if(bcrypt.compareSync(data.password , result[0].password)){
+                if(bcrypt.compareSync(req.body.password , result[0].password)){
 
                     console.log('welcome')
+                    res.redirect('/allpasswords')
                 }else{
 
                     console.log('pasword or email incorrect')
+                    res.redirect('/')
                 }
             }else{
 
                 console.log('email or password incorrect')
+                res.redirect('/')
             }
         })
     
 
 }
 
-module.exports = {Register,Login}
+module.exports = {Register,Login,getLogin,GetRegister}
