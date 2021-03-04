@@ -9,7 +9,6 @@ const GetCreatePassword = (req,res) => {
 
 const CreatePassword = (req,res)=>{
 
-        // sql query
         const sql = `insert into passwords SET web='${req.body.web}', user_name='${req.body.user_name}' , email='${req.body.email}' , password='${req.body.password}'`
         
         connection.query(sql,(err,result)=>{

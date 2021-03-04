@@ -2,6 +2,7 @@
 const connection = require('../connection')
 const bcrypt = require('bcrypt')
 
+
 // data just to test
 
 const data ={
@@ -19,26 +20,31 @@ const GetRegister = (req,res) => {
 
 const Register = (req,res) => {
     
-    //password encryption
+    if((req.body.email.length > 0 )&& (req.body.password.length > 0) ){
 
-    const data2 = bcrypt.hashSync(req.body.password, 10)
+        //password encryption
 
-    // sql query
-    const sql = `insert into users SET name='${req.body.name}' , email='${req.body.email}' , password='${data2}'`
-    
-    // crating the users
+        const data2 = bcrypt.hashSync(req.body.password, 10)
 
-    connection.query(sql,(err,result) => {
+        // sql query
+        const sql = `insert into users SET name='${req.body.name}' , email='${req.body.email}' , password='${data2}'`
+        
+        // crating the users
 
-        if(err){
-            console.log(`error when registering data: ${err} `)
-        }else{
-            console.log('User Created')
-            res.redirect('/')
+        connection.query(sql,(err,result) => {
 
-        }
-    })
+            if(err){
+                console.log(`error when registering data: ${err} `)
+            }else{
+                console.log('User Created')
+                res.redirect('/')
 
+            }
+        })
+    }else{
+        console.log('No information provided')
+        res.redirect('/reg')
+    }
 }
 
 const getLogin = (req,res) => {
@@ -49,21 +55,22 @@ const getLogin = (req,res) => {
 const Login = (req,res) => {
 
     // sqlquery 
-        console.log(req.body.email)
         const sql = `select * FROM users WHERE email='${req.body.email}'`
          
         connection.query(sql,(err,result) => {
 
             // if array or sql result is empty
             
-            if(result.length > 0 ) {
+            if((req.body.email.length > 0 )&& (req.body.password.length > 0) ) {
 
                 
                 // check passwords from the db
                 if(bcrypt.compareSync(req.body.password , result[0].password)){
 
                     console.log('welcome')
+
                     res.redirect('/allpasswords')
+
                 }else{
 
                     console.log('pasword or email incorrect')

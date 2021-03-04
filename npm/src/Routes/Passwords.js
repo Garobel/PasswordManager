@@ -1,7 +1,7 @@
 // import module express and Router method
 const express = require ('express')
 const router = express.Router()
-
+const VerifyToken = require('../MiddleWares/verifyToken')
 
 //controllers import
 const UsersAccount = require('../Controllers/UsersAccount')

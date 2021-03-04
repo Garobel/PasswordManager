@@ -1,0 +1,83 @@
+:root {
+    --btns-color         : rgb(58, 117, 212);
+    --containers-bg      : rgb(211, 212, 211); 
+    --border-line-inputs : rgb(211, 212, 211);
+    --border-line-btn    : rgb(58, 117, 212);
+  }
+
+h1{
+    text-align: center;
+    color: var(--btns-color);
+}
+.login-container {
+
+    display             : flex ;
+    flex-direction      : column;
+    max-width           : 500px;
+    min-width           : 300px;
+    min-height          : 250px;
+    background-color    : var(--containers-bg);
+    margin              : auto ;
+    border-radius       : 5px;
+
+}
+
+
+.inputs-login {
+
+    display             : flex;
+    flex-direction      : column;
+    
+
+}
+
+.inputs-login label{
+
+    color               : black;
+    font-size           : medium;
+    margin-left         : 5px;
+}
+
+.inputs-login input{
+
+    
+    border              : 1px solid var(--border-line-inputs);
+    height              : 30px;
+
+    
+
+}
+
+.btn-login {
+
+    border              : 1px solid var(--border-line-btn);
+    border-radius       : 5px;
+    color               : white;
+    background-color    : var(--btns-color);
+    margin-top          : 10px;
+    font-size           : medium;
+
+
+}
+
+.btn-register {
+
+    color               : white; 
+    text-decoration     : none;
+    border-radius       : 5px;
+    border              : 1px solid  var(--border-line-inputs);
+    background-color    : var(--btns-color);
+    text-align          : center;
+    margin-top          : 10px;
+    font-size           : medium;
+    padding             : 5px 0 5px 0;
+
+}
+
+.copyright{
+    
+    text-align          : center;
+    font-size           : x-small;
+    
+}
+

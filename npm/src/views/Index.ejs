@@ -4,23 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Password Manager-Nodejs</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-    <div>
-        <form action="/" method="POST">
+    <div class="login-container">
+        <form  action="/" method="POST">
+            <div class= "inputs-login" >
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email">
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
             
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email">
 
-            <label for="password">Password</label>
-            <input type="text" id="password" name="password">
-
-            <input type="submit" value="Login">
-            <a href="/reg">Register</a>
+                <input class= "btn-login" type="submit" value="Login">
+                <a class= "btn-register" href="/reg">Register</a>
+            </div>
         
         </form>
+        <p class="copyright">© Roberto Garcia. All rights reserved</p>
     </div>
     
 </body>

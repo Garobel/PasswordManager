@@ -19,6 +19,9 @@ const Middleware = require('./MiddleWares/logged')
 const router = require('./Routes/Passwords')
 app.use(express.urlencoded({extended: false}))
 
+// Path of our static files
+app.use(express.static(path.join(__dirname,'public')))
+
 
 // Import Routes
 
@@ -26,8 +29,7 @@ app.use(Middleware.logged)
 app.use(router)
 
 
-// Path of our static files
-app.use(express.static(path.join(__dirname,'public')))
+
 
 
 //app running
