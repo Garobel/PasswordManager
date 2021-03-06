@@ -3,6 +3,7 @@ const connection = require('../connection')
 const bcrypt = require('bcrypt')
 
 
+
 const GetCreatePassword = (req,res) => {
     res.render('CreatePassword')
 }

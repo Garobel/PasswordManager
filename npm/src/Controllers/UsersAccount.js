@@ -59,22 +59,28 @@ const Login = (req,res) => {
          
         connection.query(sql,(err,result) => {
 
-            // if array or sql result is empty
             
-            if((req.body.email.length > 0 )&& (req.body.password.length > 0) ) {
-
+            if((req.body.email.length > 0 ) && (req.body.password.length > 0) ) {
                 
-                // check passwords from the db
-                if(bcrypt.compareSync(req.body.password , result[0].password)){
+                if (result.length > 0){
+                    // check passwords from the db
+                    if(bcrypt.compareSync(req.body.password , result[0].password)){
 
-                    console.log('welcome')
+                        console.log('welcome')
 
-                    res.redirect('/allpasswords')
+                        res.redirect('/allpasswords')
 
+                    }else{
+
+                        console.log('pasword or email incorrect')
+                        res.redirect('/')
+                    }
                 }else{
 
-                    console.log('pasword or email incorrect')
+                    console.log('email or password incorrect')
                     res.redirect('/')
+                    
+
                 }
             }else{
 

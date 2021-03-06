@@ -29,9 +29,6 @@ app.use(Middleware.logged)
 app.use(router)
 
 
-
-
-
 //app running
 app.listen(app.get('port'),() =>{
     console.log(app.get('title') + ` Running in port ${app.get('port')}`)
