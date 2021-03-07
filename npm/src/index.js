@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const routes = require('./Routes/Passwords')
 const path = require ('path')
+const session =require('express-session')
 
 
 // app config
@@ -17,11 +18,19 @@ const connection = require('./connection')
 //midleware
 const Middleware = require('./MiddleWares/logged')
 const router = require('./Routes/Passwords')
+const { json } = require('express')
 app.use(express.urlencoded({extended: false}))
+app.use(express.json())
 
 // Path of our static files
 app.use(express.static(path.join(__dirname,'public')))
+app.use(session({
 
+    secret : 'secret-key',
+    resave : false,
+    saveUninitialized : false
+
+}))
 
 // Import Routes
 

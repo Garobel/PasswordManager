@@ -8,15 +8,18 @@
 }
 
 body{
-    background-image: url("NodeJsBackground.png");
-    background-repeat: no-repeat, repeat;
-    background-size: cover;
+    background-image     : url("NodeJsBackground.png");
+    background-repeat    : no-repeat, repeat;
+    background-size      :  cover; 
+
 }
+
 h1,h3{
-    text-align: center;
-    color: var(--btns-color);
-    margin: 0;
+    text-align           : center;
+    color                : var(--btns-color);
+    margin               : 0;
 }
+
 .login-container {
 
     display             : flex ;

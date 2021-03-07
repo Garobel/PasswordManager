@@ -1,6 +1,8 @@
 // databases conection
 const connection = require('../connection')
 const bcrypt = require('bcrypt')
+const session = require('express-session')
+
 
 
 
@@ -9,8 +11,13 @@ const GetCreatePassword = (req,res) => {
 }
 
 const CreatePassword = (req,res)=>{
+        // session user_id
 
-        const sql = `insert into passwords SET web='${req.body.web}', user_name='${req.body.user_name}' , email='${req.body.email}' , password='${req.body.password}'`
+        const user_id = req.session.user_id
+
+        //sql creating password
+
+        const sql = `insert into passwords SET web='${req.body.web}', user_name='${req.body.user_name}' , email='${req.body.email}' , password='${req.body.password}', users_id = ${user_id}`
         
         connection.query(sql,(err,result)=>{
 
@@ -34,8 +41,11 @@ const ShowPassword = (req,res) =>{
 }
 
 const AllPassword = (req,res) => {
+    // session user id
+    const user_id = req.session.user_id
+    
 
-    sql = 'select * from passwords'
+    sql = `select * from passwords where users_id = ${user_id}`
 
     connection.query(sql,(err,result)=>{
 

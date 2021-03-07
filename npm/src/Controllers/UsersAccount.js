@@ -1,6 +1,7 @@
 // databases conection
 const connection = require('../connection')
 const bcrypt = require('bcrypt')
+const session = require('express-session')
 
 
 // data just to test
@@ -65,6 +66,10 @@ const Login = (req,res) => {
                 if (result.length > 0){
                     // check passwords from the db
                     if(bcrypt.compareSync(req.body.password , result[0].password)){
+                        // session user saving id
+                        
+                        req.session.user_id = result[0].id
+                        
 
                         console.log('welcome')
 
